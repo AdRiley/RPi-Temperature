@@ -1,4 +1,5 @@
-var d = "No Data";
+var d = "No Data|No Data"; //Global variable to store the last received temperatures
+
 var serialport = require("serialport");
 var SerialPort = serialport.SerialPort; // localize object constructor
 var serialPort = new SerialPort("/dev/ttyACM0", {
@@ -13,12 +14,12 @@ serialPort.on("open", function () {
 
   serialPort.write("1\n\r", function(err, results) {});
 
-
+// Set up a timer to ping the arduino on a fixed interval and get updated temperatures
 setInterval(function(){
 
   serialPort.write("1\n\r", function(err, results) {});
 
-},3600000);
+},3600000); // Every hour
 });
 
 
@@ -31,12 +32,12 @@ http.createServer( function(req,res) {
 
    res.writeHead(200, {'Content-Type':'text/plain'});
    var ar = d.split('|');
-   res.write('Office Teperature: ');
+   res.write('Office Temperature: ');
    res.write(ar[0]);
-   res.write(' celcius\n');
-   res.write('Outside Teperature: ');
+   res.write(' ℃\n');
+   res.write('Outside Temperature: ');
    res.write(ar[1]);
-   res.write(' celcius\n');
+   res.write(' ℃\n');
 
    res.end();
 
