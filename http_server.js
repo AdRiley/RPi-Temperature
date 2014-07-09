@@ -34,10 +34,10 @@ http.createServer( function(req,res) {
    var ar = d.split('|');
    res.write('Office Temperature: ');
    res.write(ar[0]);
-   res.write(' ℃\n');
+   res.write(' C\n');
    res.write('Outside Temperature: ');
    res.write(ar[1]);
-   res.write(' ℃\n');
+   res.write(' C\n');
 
    res.end();
 
